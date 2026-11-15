@@ -1,14 +1,21 @@
 import { Header } from "@/components/Header";
 import { StyledForm, StyledInput } from "@/components/Styled.Form";
 import { useState } from "react";
+import { createUserClient } from "@/API/createUser";
 
 export default function Registration() {
   const [login, setLogin] = useState("");
   const [password, setPassowrd] = useState("");
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
-    console.log(login, password);
+
+    try {
+      const user = await createUserClient({ login, password });
+      console.log(user);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
