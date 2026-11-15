@@ -30,8 +30,8 @@ export const Header = () => {
         <h1>MDB-NEXT</h1>
         <nav>
           <a href="/">Головна</a>
-          <a href="/">Вхід</a>
-          <a href="/">Реєстрація</a>
+          <a href="/login">Вхід</a>
+          <a href="/registration">Реєстрація</a>
         </nav>
       </HeaderContainer>
     </header>
