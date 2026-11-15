@@ -5,7 +5,6 @@ import styled from "@emotion/styled";
 
 export async function getServerSideProps(context) {
   const data = await getMovieById({ id: context.query.film });
-
   return {
     props: { data },
   };
