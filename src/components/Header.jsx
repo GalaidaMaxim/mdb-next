@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { Container } from "./Container";
+import { useState, useEffect } from "react";
 
 const HeaderContainer = styled(Container)`
   display: flex;
@@ -18,6 +19,21 @@ const HeaderContainer = styled(Container)`
 `;
 
 export const Header = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const user = window.localStorage.getItem("user");
+    if (!user) {
+      return;
+    }
+    setUser(JSON.parse(user));
+  }, []);
+
+  const onExit = () => {
+    window.localStorage.removeItem("user");
+    setUser(null);
+  };
+
   return (
     <header
       style={{
@@ -30,8 +46,14 @@ export const Header = () => {
         <h1>MDB-NEXT</h1>
         <nav>
           <a href="/">Головна</a>
-          <a href="/login">Вхід</a>
-          <a href="/registration">Реєстрація</a>
+          {!user && (
+            <>
+              <a href="/login">Вхід</a>
+              <a href="/registration">Реєстрація</a>
+            </>
+          )}
+          {user && <p>{user.login}</p>}
+          {user && <button onClick={onExit}>Вихід</button>}
         </nav>
       </HeaderContainer>
     </header>
